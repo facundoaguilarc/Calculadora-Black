@@ -12,58 +12,57 @@
     >
 
     <style>
-    body {
-        background-color: #0d0d0d;
-        color: #ffffff;
-        min-height: 100vh;
-    }
+        body {
+            background-color: #0d0d0d;
+            color: #ffffff;
+            min-height: 100vh;
+        }
 
-    header {
-        background-color: #000000;
-        border-bottom: 1px solid #1f1f1f;
-    }
+        header {
+            background-color: #000000;
+            border-bottom: 1px solid #1f1f1f;
+        }
 
-    .brand {
-        font-weight: 700;
-        letter-spacing: 0.3em;
-        font-size: 1.2rem;
-        color: #ffffff;
-    }
+        .brand {
+            font-weight: 700;
+            letter-spacing: 0.3em;
+            font-size: 1.2rem;
+            color: #ffffff;
+        }
 
-    .card {
-        background-color: #121212;
-        border: 1px solid #1f1f1f;
-        border-radius: 12px;
-    }
+        .card {
+            background-color: #121212;
+            border: 1px solid #1f1f1f;
+            border-radius: 12px;
+        }
 
-    .form-control {
-        background-color: #000000;
-        border: 1px solid #ffffff;
-        color: #ffffff;
-    }
+        .form-control {
+            background-color: #000000;
+            border: 1px solid #ffffff;
+            color: #ffffff;
+        }
 
-    .form-control::placeholder {
-        color: rgba(255, 255, 255, 0.6);
-    }
+        .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
 
-    .form-control:focus {
-        background-color: #000000;
-        color: #ffffff;
-        border-color: #ffffff;
-        box-shadow: none;
-    }
+        .form-control:focus {
+            background-color: #000000;
+            color: #ffffff;
+            border-color: #ffffff;
+            box-shadow: none;
+        }
 
-    #resultado {
-        font-size: 1.1rem;
-        color: #ffffff;
-    }
+        #resultado {
+            font-size: 1.1rem;
+            color: #ffffff;
+        }
 
-    footer {
-        font-size: 0.75rem;
-        color: #ffffff;
-    }
-</style>
-
+        footer {
+            font-size: 0.75rem;
+            color: #ffffff;
+        }
+    </style>
 </head>
 
 <body>
@@ -80,7 +79,7 @@
 
             <div class="card shadow">
                 <div class="card-body text-center">
-                    <h5 class="mb-4" style="color: #ffffff;">
+                    <h5 class="mb-4">
                         Calculadora de precio sin IVA
                     </h5>
 
@@ -97,8 +96,7 @@
 
                     <div class="mt-4">
                         <div id="resultado">
-    Ingresá un valor
-</div>
+                            Ingresá un valor
                         </div>
                     </div>
 
@@ -116,21 +114,20 @@
 <script>
 function calcularIVA() {
     const precio = parseFloat(document.getElementById("precio").value);
-    const IVA = 1.1803;
+    const IVA_PORCENTAJE = 18.03;
     const resultado = document.getElementById("resultado");
 
     if (isNaN(precio) || precio <= 0) {
-    resultado.textContent = "Ingresá un valor válido";
-    return;
-}
+        resultado.textContent = "Ingresá un valor válido";
+        return;
+    }
 
-
-    const precioSinIVA = precio / IVA;
-    const montoIVA = precio - precioSinIVA;
+    const montoIVA = precio * (IVA_PORCENTAJE / 100);
+    const precioSinIVA = precio - montoIVA;
 
     resultado.innerHTML = `
         Precio sin IVA: <strong>$${precioSinIVA.toFixed(2)}</strong><br>
-        IVA descontado: $${montoIVA.toFixed(2)}
+        IVA descontado (18,03%): $${montoIVA.toFixed(2)}
     `;
 }
 </script>
