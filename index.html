@@ -1,134 +1,131 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>BLACK | Calculadora de IVA</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<title>BLACK | Calculadora OFF</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Bootstrap -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    >
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <style>
-        body {
-            background-color: #0d0d0d;
-            color: #ffffff;
-            min-height: 100vh;
-        }
+<style>
+body {
+background-color: #0d0d0d;
+color: #ffffff;
+min-height: 100vh;
+}
 
-        header {
-            background-color: #000000;
-            border-bottom: 1px solid #1f1f1f;
-        }
+header {
+background-color: #000000;
+border-bottom: 1px solid #1f1f1f;
+}
 
-        .brand {
-            font-weight: 700;
-            letter-spacing: 0.3em;
-            font-size: 1.2rem;
-            color: #ffffff;
-        }
+.brand {
+font-weight: 700;
+letter-spacing: 0.3em;
+font-size: 1.2rem;
+}
 
-        .card {
-            background-color: #121212;
-            border: 1px solid #1f1f1f;
-            border-radius: 12px;
-        }
+.card {
+background-color: #121212;
+border: 1px solid #1f1f1f;
+border-radius: 12px;
+}
 
-        .form-control {
-            background-color: #000000;
-            border: 1px solid #ffffff;
-            color: #ffffff;
-        }
+.form-control {
+background-color: #000000;
+border: 1px solid #ffffff;
+color: #ffffff;
+}
 
-        .form-control::placeholder {
-            color: rgba(255, 255, 255, 0.6);
-        }
+.form-control:focus {
+background-color: #000000;
+color: #ffffff;
+border-color: #ffffff;
+box-shadow: none;
+}
 
-        .form-control:focus {
-            background-color: #000000;
-            color: #ffffff;
-            border-color: #ffffff;
-            box-shadow: none;
-        }
+.btn-off {
+border: 1px solid #ffffff;
+color: #ffffff;
+background: transparent;
+}
 
-        #resultado {
-            font-size: 1.1rem;
-            color: #ffffff;
-        }
+.btn-off:hover {
+background-color: #ffffff;
+color: #000000;
+}
 
-        footer {
-            font-size: 0.75rem;
-            color: #ffffff;
-        }
-    </style>
+#resultado {
+font-size: 1.1rem;
+margin-top: 1rem;
+}
+#resultado,
+#resultado strong {
+  color: #ffffff;
+}
+
+</style>
 </head>
 
 <body>
 
-<header class="py-3">
-    <div class="container text-center">
-        <span class="brand">BLACK</span>
-    </div>
+<header class="py-3 text-center">
+<span class="brand">BLACK</span>
 </header>
 
 <div class="container d-flex align-items-center justify-content-center" style="min-height: calc(100vh - 120px);">
-    <div class="row w-100 justify-content-center">
-        <div class="col-11 col-sm-10 col-md-6 col-lg-4">
+<div class="col-11 col-sm-10 col-md-6 col-lg-4">
 
-            <div class="card shadow">
-                <div class="card-body text-center">
-                    <h5 class="mb-4" style="color: #ffff">
-                        Calculadora de precio sin IVA
-                    </h5>
+<div class="card shadow">
+<div class="card-body text-center">
 
-                    <div class="mb-3">
-                        <input
-                          type="number"
-                          step="0.01"
-                          class="form-control text-center"
-                          id="precio"
-                          placeholder="Precio con IVA"
-                          oninput="calcularIVA()"
-                        >
-                    </div>
+<h5 class="mb-4">Calculadora de Descuentos</h5>
 
-                    <div class="mt-4">
-                        <div id="resultado">
-                            Ingresá un valor
-                        </div>
-                    </div>
+<input
+type="number"
+step="0.01"
+class="form-control text-center mb-3"
+id="precio"
+placeholder="Precio original"
+>
 
-                </div>
-            </div>
+<div class="d-grid gap-2 d-sm-flex justify-content-center">
+<button class="btn btn-off" onclick="calcularDescuento(20)">20% OFF</button>
+<button class="btn btn-off" onclick="calcularDescuento(30)">30% OFF</button>
+<button class="btn btn-off" onclick="calcularDescuento(40)">40% OFF</button>
+<button class="btn btn-off" onclick="calcularDescuento(50)">50% OFF</button>
+</div>
 
-        </div>
-    </div>
+<div id="resultado">Ingresá un precio y elegí un descuento</div>
+
+</div>
+</div>
+
+</div>
 </div>
 
 <footer class="text-center pb-3">
-    BLACK © 2026
+FACUNDO AGUILAR © 2026
 </footer>
 
 <script>
-function calcularIVA() {
-    const precio = parseFloat(document.getElementById("precio").value);
-    const IVA_PORCENTAJE = 18.03;
-    const resultado = document.getElementById("resultado");
+function calcularDescuento(porcentaje) {
+const precio = parseFloat(document.getElementById("precio").value);
+const resultado = document.getElementById("resultado");
 
-    if (isNaN(precio) || precio <= 0) {
-        resultado.textContent = "Ingresá un valor válido";
-        return;
-    }
+if (isNaN(precio) || precio <= 0) {
+resultado.textContent = "Ingresá un precio válido";
+return;
+}
 
-    const montoIVA = precio * (IVA_PORCENTAJE / 100);
-    const precioSinIVA = precio - montoIVA;
+const descuento = precio * (porcentaje / 100);
+const precioFinal = precio - descuento;
 
-    resultado.innerHTML = `
-        Precio sin IVA: <strong>$${precioSinIVA.toFixed(2)}</strong><br>
-        IVA descontado (18,03%): $${montoIVA.toFixed(2)}
-    `;
+resultado.innerHTML = `
+Precio final con <strong>${porcentaje}% OFF</strong>: <br>
+<strong>$${precioFinal.toFixed(2)}</strong><br>
+Ahorrás: $${descuento.toFixed(2)}
+`;
 }
 </script>
 
